@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view>
+    <h:head>
+        <title>Solicitud Tarjeta Crédito</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+            <link rel="stylesheet" href="/CentaurosBank/faces/css/style.css"></link>
+            <link rel="stylesheet" type="text/css" href="/CentaurosBank/faces/jsfcrud.css"></link>
+            <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet"></link>
+            <nav class="navbar navbar-expand-lg " >
+                <div class=" container">
+                    <a class=" navbar-brand" href="#">Centauro Bank</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ml-auto">
+                              <p:commandLink  styleClass="nav-item nav-link" action="inicioUsuario" value="Home"/>
+                            <p:commandLink  styleClass="nav-item nav-link" action="solicitudTarjeta" value="Solicita tu tarjeta de crédito"/>
+                            <p:commandLink  styleClass="nav-item nav-link" action="solicitudCredito" value="Solicita tu crédito de consumo"/>
+                            <p:commandLink  styleClass="nav-item nav-link" action="requerimientoServicio" value="Requerimiento sobre tu servicio"/>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <br></br><br></br><br></br>
+
+        </h:form>
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+            <h1>Crea aquí tu solicitud de tarjeta de crédito</h1>
+            <p:separator/>        
+
+            <h2 align="center">Datos Solicitud:</h2>
+            <p:panelGrid id="table2" columns="2" style="margin: 0 auto;">   
+                <p:outputLabel value="Documento Referencia"/>
+                <p:inputText required="true" value="#{solicitudesControl.solicitudes.idReferencia}"/>
+                <p:outputLabel value="Nombre Referencia"/>
+                <p:inputText required="true" value="#{solicitudesControl.solicitudes.nombreReferencia}"/>
+                <p:outputLabel value="Dirección Referencia"/>
+                <p:inputText required="true" value="#{solicitudesControl.solicitudes.direccionReferencia}"/>
+                <p:outputLabel value="Teléfono Referencia"/>
+                    <p:inputText required="true" value="#{solicitudesControl.solicitudes.telefonoReferencia}" onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));" />
+                <p:outputLabel value="Monto Solicitud:"/>
+                <p:inputText type="" required="true" value="#{solicitudesControl.solicitudes.montoSolicitud}" onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));"/>
+            </p:panelGrid>
+            <p:separator/>   
+            <h2>Anexar documentos</h2>
+            <p:fileUpload value="#{fileUploadView.files}" mode="simple" skinSimple="true" multiple="true" />
+            <br />
+            <p:commandButton value="Submit" ajax="false" action="#{fileUploadView.uploadMultiple}" disabled="true" />
+            <div align="center">
+                <p:commandButton id="crear" value="Crear Solicitud"  ajax="false" actionListener="#{solicitudesControl.agregarSolicitudes()}" update="table table2"/>
+            </div>     
+        </h:form>
+
+    </h:body>
+        </f:view>
+</html>

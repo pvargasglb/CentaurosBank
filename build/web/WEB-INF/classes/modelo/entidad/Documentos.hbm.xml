@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2020 12:32:52 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Documentos" table="documentos" catalog="centaurosbank" optimistic-lock="version">
+        <id name="idDocumento" type="int">
+            <column name="id_documento" />
+            <generator class="assigned" />
+        </id>
+        <property name="idSolicitud" type="int">
+            <column name="id_solicitud" not-null="true" />
+        </property>
+        <property name="urlDocumento" type="string">
+            <column name="url_documento" length="65535" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

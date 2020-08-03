@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2020 12:32:52 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Producto" table="producto" catalog="centaurosbank" optimistic-lock="version">
+        <id name="idProducto" type="int">
+            <column name="id_producto" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipoProducto" type="int">
+            <column name="tipo_producto" not-null="true" />
+        </property>
+        <property name="montoProducto" type="int">
+            <column name="monto_producto" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="idSolicitud" type="int">
+            <column name="id_solicitud" not-null="true" />
+        </property>
+        <property name="idCliente" type="int">
+            <column name="id_cliente" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

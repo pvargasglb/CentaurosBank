@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2020 12:32:52 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Peticiones" table="peticiones" catalog="centaurosbank" optimistic-lock="version">
+        <id name="idPeticion" type="int">
+            <column name="id_peticion" />
+            <generator class="assigned" />
+        </id>
+        <property name="idProducto" type="int">
+            <column name="id_producto" not-null="true" />
+        </property>
+        <property name="tipoPeticion" type="string">
+            <column name="tipo_peticion" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

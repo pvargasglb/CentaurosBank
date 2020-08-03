@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tabla Clientes</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+            <link rel="stylesheet" href="/CentaurosBank/faces/css/style.css"></link>
+            <link rel="stylesheet" type="text/css" href="/CentaurosBank/faces/jsfcrud.css"></link>
+            <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet"></link>
+            <nav class="navbar navbar-expand-lg " >
+                <div class=" container">
+                    <a class=" navbar-brand" href="#">Centauro Bank</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ml-auto">
+                            <p:commandLink  styleClass="nav-item nav-link" action="inicioUsuario" value="Home"/>
+                            <p:commandLink  styleClass="nav-item nav-link" action="solicitudTarjeta" value="Solicita tu tarjeta de crédito"/>
+                            <p:commandLink  styleClass="nav-item nav-link" action="solicitudCredito" value="Solicita tu crédito de consumo"/>
+                            <p:commandLink  styleClass="nav-item nav-link" action="requerimientoServicio" value="Requerimiento sobre tu servicio"/>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <br></br><br></br><br></br>
+
+        </h:form>
+        <h:form>
+            <h1>Crea aquí tu requerimiento sobre tu tarjeta de crédito</h1>
+            <p:separator/>        
+            <h2 align="center">Datos cliente:</h2>
+            <p:panelGrid columns="2" style="margin: 0 auto;">               
+            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                <p:outputLabel value="Documento"/>
+                <p:inputText value="#{clienteControl.cliente.primerNombre}"/> 
+                <p:outputLabel value="Primer Nombre"/> 
+                <p:inputText value="#{clienteControl.cliente.primerNombre}"/>
+                <p:outputLabel value="Segundo Nombre"/> 
+                <p:inputText value="#{clienteControl.cliente.primerNombre}"/>
+                <p:outputLabel value="Primer Apellido"/> 
+                <p:inputText value="#{clienteControl.cliente.primerNombre}"/>
+                <p:outputLabel value="segundo Apellido"/> 
+                <p:inputText value="#{clienteControl.cliente.primerNombre}"/>
+            </p:panelGrid>
+            <p:commandButton  value="Buscar Cliente" actionListener="#{clienteControl.agregarCliente()}"/>
+             </p:panelGrid>
+            <h2 align="center">Datos Requerimiento:</h2>
+            <p:panelGrid columns="2" style="margin: 0 auto;">   
+                <p:outputLabel value="Tipo de requerimiento"/>
+                <p:inputText value="#{solicitudesControl.solicitudes.idReferencia}"/>
+                <p:outputLabel value="Descripción"/>
+                <p:editor id="editor" widgetVar="editorWidget" value="#{solicitudesControl.solicitudes.idReferencia}" width="600" />
+                <p:outputLabel value="Estado"/>
+                <p:inputText value="#{solicitudesControl.solicitudes.direccionReferencia}"/>
+            </p:panelGrid>
+            <p:separator/>   
+            <h2>Anexar documentos</h2>
+            <p:fileUpload value="#{fileUploadView.files}" mode="simple" skinSimple="true" multiple="true" />
+            <br />
+            <p:commandButton value="Submit" ajax="false" action="#{fileUploadView.uploadMultiple}" disabled="true" />
+            <div align="center">
+                <p:commandButton  value="Crear Requerimiento" actionListener="#{clienteControl.agregarCliente()}"/>
+            </div>  
+            <p:separator/>    
+        </h:form>
+
+    </h:body>
+</html>

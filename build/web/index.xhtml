@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Bievenido</title>
+    </h:head>
+    <h:body>
+        
+         <script type="text/javascript">
+            function hideDialogOnSuccess(args, dialogWidgetVar) {
+                if ( !args.validationFailed) {
+                    PF(dialogWidgetVar).hide();
+                }
+            }
+        </script>
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+            <link rel="stylesheet" href="/CentaurosBank/faces/css/style.css"></link>
+            <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet"></link>
+
+
+            <nav class="navbar navbar-expand-lg " >
+                <div class=" container">
+                    <a class=" navbar-brand" href="#">Centauro Bank</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ml-auto">
+                            <p:commandButton styleClass="btn btn-info btn-lg tombol" value="Ingresa" actionListener="#{clienteControl.limpiarCliente()}" oncomplete="PF('dialogoLogin').show();" update=":formLogin"/>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <br></br><br></br><br></br>
+
+            <div align="center">
+                <h1 class="display-4">Hacemos realidad tus sueños</h1>
+                <p:commandButton styleClass="btn btn-info btn-lg tombol" value="Crea tu usuario para acceder a nuestros servicios" actionListener="#{clienteControl.limpiarCliente()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                <p:separator/>
+            </div>
+
+            <!-- info panel -->
+            <div align="center" style="padding: 150px">
+                <div align="center">
+                    <div class="row">
+                        <div class="col-sm">
+                            <img src="img/employee.png" alt="Employee" class="img-fluid float-left"></img>
+                            <h4>Tarjetas de crédito</h4>
+                        </div>
+                        <div class="col-lg">
+                            <img src="img/hires.png" alt="HiRes" class="img-fluid float-left"></img>
+                            <h4>Créditos de consumo</h4>
+                        </div>
+                        <div class="col-lg">
+                            <img src="img/security.png" alt="Security" class="img-fluid float-left"></img>
+                            <h4>Soporte sobre tus servicios</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+        <h:form id="formAgregar">
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+            <p:dialog id="dlgAgregar" header="Agregar Cliente" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                <p:panelGrid id="table" columns="2" style="margin: 0 auto;">                                
+                    <p:outputLabel value="Documento"/>
+                    <p:inputText  required="true" value="#{clienteControl.cliente.idCliente}"/>
+                    <p:outputLabel value="Primer Nombre"/>
+                    <p:inputText  required="true" value="#{clienteControl.cliente.primerNombre}"/>
+                    <p:outputLabel value="Segundo Nombre"/>
+                    <p:inputText value="#{clienteControl.cliente.segundoNombre}"/>
+                    <p:outputLabel value="Primer Apellido"/>
+                    <p:inputText  required="true" value="#{clienteControl.cliente.primerApellido}"/>
+                    <p:outputLabel value="segundo Apellido"/>
+                    <p:inputText value="#{clienteControl.cliente.segundoApellido}"/>
+                    <p:outputLabel for="departamento" value="Departamento: " />
+                    <p:selectOneMenu id="departamento" value="#{clienteControl.departamento}" style="width:150px">
+                        <p:ajax listener="#{clienteControl.cambiarDepartamento}" update="ciudad" />
+                        <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{clienteControl.departamentos}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel for="ciudad" value="Ciudad :" />
+                    <p:selectOneMenu id="ciudad" value="#{clienteControl.ciudad}" style="width:150px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{clienteControl.ciudades}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Dirección"/>
+                    <p:inputText  required="true" value="#{clienteControl.cliente.direccion}"/>
+                    <p:outputLabel value="Teléfono"/>
+                    <p:inputText  required="true" value="#{clienteControl.cliente.telefono}" onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));"/>
+                    <p:outputLabel value="Celular"/>
+                    <p:inputText required="true" value="#{clienteControl.cliente.celular}" onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));" />	
+                    <p:outputLabel value="Correo"/>
+                    <h:inputText id="email" value="#{clienteControl.cliente.correo}" required="true" label="Email" validatorMessage="El correo no es válido">
+                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    </h:inputText>
+                    <p:outputLabel value="Usuario"/>
+                    <p:outputLabel value="IMPORTANTE: Tu usuario será tu documento de identidad!"/>
+                    <p:outputLabel value="Contraseña"/>
+                    <p:password id="pwd1" value="#{clienteControl.cliente.contrasena}" required="true" />
+                </p:panelGrid>
+                <p:commandButton  value="Crear Usuario"  ajax="false" actionListener="#{clienteControl.agregarCliente()}" update="table">
+                </p:commandButton> 
+                <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();" />
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formLogin">
+            <p:dialog id="dlgLogin" header="Ingresa a tu mundo" widgetVar="dialogoLogin" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                <p:panelGrid id="table" columns="2" style="margin: 0 auto;">                                
+                    <p:outputLabel value="Usuario"/>
+                    <p:inputText  required="true" value="#{clienteControl.cliente.usuario}"/>
+                    <p:outputLabel value="Contraseña"/>
+                    <p:password id="pwd1" value="#{clienteControl.cliente.contrasena}" required="true" />
+                </p:panelGrid>
+                <p:commandButton  value="Ingresar"   ajax="false" actionListener="#{clienteControl.validarLogin()}"  oncomplete="PF('dialogoLogin').hide();"/>
+                <p:commandButton  value="Cancelar" onclick="PF('dialogoLogin').hide();"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
